@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Card.css";
 import { Link } from "react-router-dom";
 
 const Card = (props) => {
-  const addClass = () => {
-    // Your addClass logic here
-  };
+
 
   return (
     <React.Fragment>
@@ -26,7 +24,7 @@ const Card = (props) => {
               <div className="heart">
                 <i
                   className="fa-sharp fa-solid fa-heart"
-                  onClick={addClass}
+                  
                 ></i>
               </div>
             </div>

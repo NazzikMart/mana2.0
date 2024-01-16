@@ -43,7 +43,7 @@
 .contact-info-item__desc {
     font-size: 18px;
     margin-top: 20px;
-    color: rgba(0, 198, 94, 1);
+    color: #550486;
 }
 
 .contact-form__map {
@@ -92,8 +92,8 @@
 }
 
 .form-contact-name:focus {
-    border-color: rgba(0, 198, 94, 1);
-    color: rgba(0, 198, 94, 1);
+    border-color: #550486;
+    color: #550486;
 }
 
 .form-contact-phone {
@@ -109,8 +109,8 @@
 }
 
 .form-contact-phone:focus {
-    border-color: rgba(0, 198, 94, 1);
-    color: rgba(0, 198, 94, 1);
+    border-color: #550486;
+    color: #550486;
 }
 
 .form-contact-comment {
@@ -125,8 +125,8 @@
 }
 
 .form-contact-comment:focus {
-    border-color: rgba(0, 198, 94, 1);
-    color: rgba(0, 198, 94, 1);
+    border-color: #550486;
+    color: #550486;
 }
 
 .form-contact-button {
@@ -141,10 +141,10 @@
 }
 
 .form-contact-button:hover {
-    background: rgba(0, 198, 94, 1);
+    background: #550486;
 
     color: white;
-    border-color: rgba(0, 198, 94, 1);
+    border-color: #550486;
 }
 
 @media (max-width :1240px) {

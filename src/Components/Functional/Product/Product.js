@@ -1,10 +1,10 @@
 import React from "react";
 import "./Product.css";
 
-const Product = ({ infoProducts, addToOrder }) => {
+const Product = (props) => {
   return (
     <div>
-      {infoProducts.map((el) => (
+      {props.infoProducts.map((el) => (
         <div className="element-product-wrapper" key={el.id}>
           <div className="element-product-imgs">
             <img className="product-img" src={el.img} alt={el.name} />
@@ -28,7 +28,7 @@ const Product = ({ infoProducts, addToOrder }) => {
             <div className="element-product-details-btn">
               <button
                 className="element-product-details-button"
-                onClick={() => addToOrder(el)}
+                onClick={() => props.addToOrder(el)}
               >
                 <i className="fa-sharp fa-solid fa-cart-shopping"></i> В кошик
               </button>

@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import Navbar from "../Navbar/Navbar.js";
 import Footer from "../../UI/Footer/Footer.js";
-import products from '../../../product.json'
+import products from "../../../product.json";
 import "../../../index.css";
 import "../../media.css";
 
 const App = () => {
-  const [product] = useState(
-    products.product
-  );
+  const [product] = useState(products.product);
   const [orders, setOrders] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
   const [infoProducts, setInfoProducts] = useState([]);
@@ -28,8 +26,6 @@ const App = () => {
     { key: "VacuumCleaner", name: "Пилососи" },
     { key: "ThermalMug", name: "Термокружки" },
   ]);
-
-
 
   const [currentItems, setCurrentItems] = useState([...product]);
   const [newItem, setNewItem] = useState([]);
@@ -95,6 +91,8 @@ const App = () => {
     setInfoProducts([item]);
   };
 
+ 
+
   const removeProduct = (productId) => {
     setOrders((prevOrders) =>
       prevOrders.filter((order) => order.id !== productId)
@@ -119,6 +117,15 @@ const App = () => {
         )
       );
     }
+  };
+
+  const choseCategoryNew = (category) => {
+    if (category === "all") {
+      setCurrentItems(product);
+      return;
+    }
+
+    setCurrentItems(product.filter((el) => el.category === category));
   };
 
   const handleSearch = (event) => {
@@ -187,21 +194,22 @@ const App = () => {
         totalCost={totalCost}
         infoProduct={infoProduct}
         infoProducts={infoProducts}
-        updateOrders = {updateOrders}
-        searchResults = {searchResults}
-        services = {services}
-        renderCart = {renderCart}
-        searchTerm = {searchTerm}
-        currentItems = {currentItems}
-        choseProducer = {choseProducer}
-        categories = {categories}
-        minPrice = {minPrice}
-        maxPrice = {maxPrice}
-        producers = {producers}
-        selectedProducers = {selectedProducers}
-        showFunction = {showFunction}
-        choseCategory = {choseCategory}
-        handleSearch = {handleSearch}
+        updateOrders={updateOrders}
+        searchResults={searchResults}
+        services={services}
+        renderCart={renderCart}
+        searchTerm={searchTerm}
+        currentItems={currentItems}
+        choseProducer={choseProducer}
+        categories={categories}
+        minPrice={minPrice}
+        maxPrice={maxPrice}
+        producers={producers}
+        selectedProducers={selectedProducers}
+        showFunction={showFunction}
+        choseCategory={choseCategory}
+        handleSearch={handleSearch}
+        choseCategoryNew={choseCategoryNew}
       />
       <Footer />
     </div>

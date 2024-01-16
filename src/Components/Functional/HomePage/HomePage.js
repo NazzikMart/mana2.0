@@ -11,23 +11,14 @@ import "./HomePage.css";
 import "../../media.css";
 
 const HomePage = (props) => {
-  const [currentItems, setCurrentItems] = useState(props.product);
-
-  const choseCategory = (category) => {
-    if (category === "all") {
-      setCurrentItems(props.product);
-      return;
-    }
-
-    setCurrentItems(props.product.filter((el) => el.category === category));
-  };
-
   return (
     <div className="homepage-wrapper">
       <Header />
-      {/* <ServiceCenter /> */}
       <span className="BestSellersName">Лідери продажів</span>
-      <FilterProduct choseCategory={choseCategory} />
+      <FilterProduct
+        choseCategory={props.choseCategory}
+        categories={props.categories}
+      />
       <BestSellers
         product={props.product}
         addToOrder={props.addToOrder}

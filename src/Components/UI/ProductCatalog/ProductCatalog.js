@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import "./ProductCatalog.css";
 import ProductCatalogFilter from "../ProductCatalogFilter/ProductCatalogFilter.js";
 import ProductCatalogSort from "../ProductCatalogSort/ProductCatalogSort.js";
 import Card from "../Card/Card.js";
 import ServiceAndService from "../ServiceAndService/ServiceAndService.js";
-import products from "../../../product.json";
+
 
 const ProductCatalog = (props) => {
   return (
@@ -24,26 +24,22 @@ const ProductCatalog = (props) => {
               currentItems={props.currentItems}
               choseProducer={props.choseProducer}
               renderCart={props.renderCart}
-             
               product={props.product}
               orders={props.orders}
               removeProduct={props.removeProduct}
               counter={props.counter}
               totalCost={props.totalCost}
               updateOrders={props.updateOrders}
-       
               infoProducts={props.infoProducts}
-              services = {props.services}
-        
-         
-              categories = {props.categories}
-              minPrice = {props.minPrice}
-              maxPrice = {props.maxPrice}
-              producers = {props.producers}
-              selectedProducers = {props.selectedProducers}
-              showFunction = {props.showFunction}
-              choseCategory = {props.choseCategory}
-              handleSearch = {props.handleSearch}
+              services={props.services}
+              categories={props.categories}
+              minPrice={props.minPrice}
+              maxPrice={props.maxPrice}
+              producers={props.producers}
+              selectedProducers={props.selectedProducers}
+              showFunction={props.showFunction}
+              choseCategory={props.choseCategory}
+              handleSearch={props.handleSearch}
             />
           </div>
           <ProductCatalogFilter

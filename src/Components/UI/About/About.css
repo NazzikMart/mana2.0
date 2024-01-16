@@ -19,6 +19,9 @@ section {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
+    color: #550486;
+    background: transparent;
+    border: 2px solid #550486;
 }
 
 .store-info {
@@ -29,15 +32,21 @@ section {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 30px;
+    color: #550486;
+    background: transparent;
+    border: 2px solid #550486;
 }
 
 .about-wrapper {
     width: 100%;
     padding: 30px;
+    color: white;
+    
 }
 
 .about-us {
     width: 90%;
+    
 }
 
 .our-products {
@@ -52,4 +61,7 @@ section {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: auto;
     margin-top: 30px;
+    color: #550486;
+    background: transparent;
+    border: 2px solid #550486;
 }

@@ -74,7 +74,7 @@
 
 .add-to-cart-btn,
 .learn-more-btn {
-  background-color: #4caf50;
+  background-color: #550486;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -91,7 +91,7 @@
 
 .add-to-cart-btn:hover,
 .learn-more-btn:hover {
-  background-color: #45a049;
+  background-color: #330251;
   color: white;
   text-decoration: none;
 }

@@ -6,10 +6,9 @@ import Contact from "../../UI/Contact/Contact.js";
 import Besket from "../../UI/Besket/Besket.js";
 import HomePage from "../../Functional/HomePage/HomePage.js";
 import Profile from "../Profile/Profile.js";
-import Product from "../Product/Product.js";
+import Product from '../Product//Product.js'
 import Remont from "../../UI/Remont/Remont.js";
 import User from "../User/User.js";
-import logo from "../../../img/icons/logo.jpg";
 import Purchase from "../../UI/Purchase/Purchase.js";
 import "./Navbar.css";
 
@@ -83,6 +82,7 @@ const Navbar = (props) => {
               showFunction={props.showFunction}
               choseCategory={props.choseCategory}
               handleSearch={props.handleSearch}
+              choseCategoryNew={props.choseCategoryNew}
             />
           }
         />
@@ -143,6 +143,25 @@ const Navbar = (props) => {
               addToOrder={props.addToOrder}
               product={props.product}
               orders={props.orders}
+              removeProduct={props.removeProduct}
+              counter={props.counter}
+              totalCost={props.totalCost}
+              updateOrders={props.updateOrders}
+              infoProduct={props.infoProduct}
+              services={props.services}
+              renderCart={props.renderCart}
+              searchTerm={props.searchTerm}
+              searchResults={props.searchResults}
+              currentItems={props.currentItems}
+              choseProducer={props.choseProducer}
+              categories={props.categories}
+              minPrice={props.minPrice}
+              maxPrice={props.maxPrice}
+              producers={props.producers}
+              selectedProducers={props.selectedProducers}
+              showFunction={props.showFunction}
+              choseCategory={props.choseCategory}
+              handleSearch={props.handleSearch}
             />
           }
         />
