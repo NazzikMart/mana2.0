@@ -79,12 +79,12 @@
 }
 
 .list-group-item__user:hover {
-    background-color: rgb(246, 87, 87);
+    background-color: #FF6633;
     color: white;
 }
 
 .list-group-item__user:hover {
-    background-color: rgb(246, 87, 87);
+    background-color: #FF6633;
     color: white;
 }
 
@@ -133,13 +133,13 @@
 
 .user-information-details-item__hobby-btn:hover,
 .user-information-details-item__car-btn:hover {
-    background-color: rgb(246, 87, 87);
+    background-color: #FF6633;
     color: white;
-    border: 2px solid rgb(246, 87, 87);
+    border: 2px solid #FF6633;
 }
 
 .list-group-item__user-btn-logout {
-    background-color: rgb(246, 87, 87);
+    background-color: #FF6633;
     color: white;
     font-weight: 800;
 }

@@ -3,54 +3,6 @@ import { Link } from "react-router-dom";
 import "./Besket.css";
 
 const Besket = (props) => {
-
-
-  const incrementCounter = (productId, price) => {
-    const updatedOrders = props.orders.map((order) => {
-      if (order.id === productId) {
-        const newCounter = order.counter + 1;
-        if (newCounter >= 1) {
-          return { ...order, counter: newCounter };
-        }
-      }
-      return order;
-    });
-
-    const totalCost = updatedOrders.reduce((accumulator, order) => {
-      return accumulator + order.price * order.counter;
-    }, 0);
-
-    props.updateOrders(updatedOrders, totalCost);
-  };
-
-  const decrementCounter = (productId, price) => {
-    const updatedOrders = props.orders.map((order) => {
-      if (order.id === productId) {
-        const newCounter = order.counter - 1;
-        if (newCounter >= 1) {
-          return { ...order, counter: newCounter };
-        } else {
-          return null;
-        }
-      }
-      return order;
-    });
-
-    const filteredOrders = updatedOrders.filter((order) => order !== null);
-
-    const totalCost = filteredOrders.reduce((accumulator, order) => {
-      return accumulator + order.price * order.counter;
-    }, 0);
-
-    props.updateOrders(filteredOrders, totalCost);
-  };
-
-  const handleRemoveProduct = (productId) => {
-    props.removeProduct(productId);
-  };
-
- 
-
   return (
     <div className="beskett">
       <span className="besket-name">Кошик з товарами</span>
@@ -74,13 +26,13 @@ const Besket = (props) => {
               <div className="besket-counter">
                 <span
                   className="besket-counter-plus"
-                  onClick={() => incrementCounter(item.id)}
+                  onClick={() => props.incrementCounter(item.id)}
                 >
                   +
                 </span>
                 <span
                   className="besket-counter-minus"
-                  onClick={() => decrementCounter(item.id)}
+                  onClick={() => props.decrementCounter(item.id)}
                 >
                   -
                 </span>
@@ -89,7 +41,7 @@ const Besket = (props) => {
             <div className="besket-price">{item.price} грн</div>
             <div
               className="delete-product"
-              onClick={() => handleRemoveProduct(item.id)}
+              onClick={() => props.handleRemoveProduct(item.id)}
             >
               <i className="fa-solid fa-trash"></i>
             </div>

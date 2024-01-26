@@ -1,7 +1,23 @@
 import React from "react";
 import "./Purchase.css";
+import { useState } from "react";
 
-const Purchase = () => {
+const Purchase = (props) => {
+  const [totalSum, setTotalSum] = useState(0);
+
+  const calculateTotalSum = () => {
+    let sum = 0;
+    props.orders.forEach((el) => {
+      sum += el.price;
+    });
+    setTotalSum(sum);
+  };
+
+  React.useEffect(() => {
+    calculateTotalSum();
+  }, [props.orders]);
+
+  console.log(props.orders);
   return (
     <div className="purchase-wrapper">
       <div className="contacts-datails-items">
@@ -69,31 +85,56 @@ const Purchase = () => {
             <span>Portmone.com</span>
           </div>
         </div>
+        <div className="totalSum">Загальна сумма : {totalSum}</div>
+        <div className="purchase-product-details-item-btn">
+          <button className="purchase-product-details-item-button">
+            Замовити
+          </button>
+        </div>
       </div>
 
       <div className="purchase-product-details-items">
-        <div className="purchase-product-details-item">
-          <div className="purchase-product-details-item-img">
-            <img
-              className="purchase-product-details-item-images"
-              src="https://scdn.comfy.ua/89fc351a-22e7-41ee-8321-f8a9356ca351/https://cdn.comfy.ua/media/catalog/product/m/7/m7-black-back.jpg/w_600"
-            />
-          </div>
-          <div className="purchase-product-details-item-name">Телефон</div>
-          <div className="purchase-product-details-item-counter">2 шт</div>
-          <div className="purchase-product-details-item-price">
-            <span className="purchase-product-details-item-price__summa">
-              Сума замовлення :
-            </span>{" "}
-            10000 грн
-          </div>
-          <div className="purchase-product-details-item-btn">
-            <button className="purchase-product-details-item-button">
-              Замовити
-            </button>
+        {props.orders.map((el) => {
+          return (
+            <div className="besket-products" key={el.id}>
+          <div className="besket-product">
+            <div className="besket-product-names">
+              <img src={el.img} className="besket-product-img" alt="" />
+              <span className="besket-product-name">{el.name}</span>
+            </div>
+
+            <div className="besket-count">
+              <span className="besket-count-item">{el.counter}</span>
+              <div className="besket-counter">
+                <span
+                  className="besket-counter-plus"
+                  onClick={() => props.incrementCounter(el.id)}
+                >
+                  +
+                </span>
+                <span
+                  className="besket-counter-minus"
+                  onClick={() => props.decrementCounter(el.id)}
+                >
+                  -
+                </span>
+              </div>
+            </div>
+            <div className="besket-price">{el.price} грн</div>
+            <div
+              className="delete-product"
+              onClick={() => props.handleRemoveProduct(el.id)}
+            >
+              <i className="fa-solid fa-trash"></i>
+            </div>
           </div>
         </div>
+          );
+        })}
+       
+       
       </div>
+      
     </div>
   );
 };

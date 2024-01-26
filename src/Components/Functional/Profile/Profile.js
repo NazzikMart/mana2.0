@@ -7,6 +7,8 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "./firebase";
+
+
 export default function Profile() {
   function handlerLogin() {
     setIsAcount(!isAccount);

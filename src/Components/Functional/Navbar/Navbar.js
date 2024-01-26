@@ -6,7 +6,7 @@ import Contact from "../../UI/Contact/Contact.js";
 import Besket from "../../UI/Besket/Besket.js";
 import HomePage from "../../Functional/HomePage/HomePage.js";
 import Profile from "../Profile/Profile.js";
-import Product from '../Product//Product.js'
+import Product from "../Product//Product.js";
 import Remont from "../../UI/Remont/Remont.js";
 import User from "../User/User.js";
 import Purchase from "../../UI/Purchase/Purchase.js";
@@ -15,18 +15,18 @@ import "./Navbar.css";
 const Navbar = (props) => {
   return (
     <div className="navbar-wrapper">
-      <header class="clearfix">
-        <div class="container">
-          <div class="header-left">
+      <header className="clearfix">
+        <div className="container">
+          <div className="header-left">
             <h1>
               {" "}
               <span className="header-logo">МаНа</span> - магазин цифрової
               техніки
             </h1>
           </div>
-          <div class="header-right">
+          <div className="header-right">
             <label for="open">
-              <span class="hidden-desktop"></span>
+              <span className="hidden-desktop"></span>
             </label>
             <input type="checkbox" name="" id="open" />
             <nav>
@@ -40,15 +40,15 @@ const Navbar = (props) => {
           </div>
         </div>
       </header>
-      <section class="clearfix new-crearfix">
-        <div class="container">
-          <div class="section-left">
-            <h1 class="section-title">
+      <section className="clearfix new-crearfix">
+        <div className="container">
+          <div className="section-left">
+            <h1 className="section-title">
               В подарунок до Iphon 15 Pro Max отримую AirPods
             </h1>
           </div>
-          <div class="section-right">
-            <button class="learn-more">Отримати</button>
+          <div className="section-right">
+            <button className="learn-more">Отримати</button>
           </div>
         </div>
       </section>
@@ -64,7 +64,7 @@ const Navbar = (props) => {
               infoProducts={props.infoProducts}
               searchTerm={props.searchTerm}
               searchResults={props.searchResults}
-              addClass={props.addClass}
+              addclassName={props.addclassName}
               currentItems={props.currentItems}
               choseProducer={props.choseProducer}
               renderCart={props.renderCart}
@@ -83,6 +83,9 @@ const Navbar = (props) => {
               choseCategory={props.choseCategory}
               handleSearch={props.handleSearch}
               choseCategoryNew={props.choseCategoryNew}
+              handleRemoveProduct={props.handleRemoveProduct}
+              decrementCounter={props.decrementCounter}
+              incrementCounter={props.incrementCounter}
             />
           }
         />
@@ -90,7 +93,17 @@ const Navbar = (props) => {
         <Route path="/remont" element={<Remont />} />
         <Route path="/user" element={<User />} />
 
-        <Route path="/purchase" element={<Purchase />} />
+        <Route
+          path="/purchase"
+          element={
+            <Purchase
+              orders={props.orders}
+              handleRemoveProduct={props.handleRemoveProduct}
+              decrementCounter={props.decrementCounter}
+              incrementCounter={props.incrementCounter}
+            />
+          }
+        />
         <Route
           path="/catalog"
           element={
@@ -118,6 +131,9 @@ const Navbar = (props) => {
               showFunction={props.showFunction}
               choseCategory={props.choseCategory}
               handleSearch={props.handleSearch}
+              handleRemoveProduct={props.handleRemoveProduct}
+              decrementCounter={props.decrementCounter}
+              incrementCounter={props.incrementCounter}
             />
           }
         />
@@ -131,6 +147,9 @@ const Navbar = (props) => {
               counter={props.counter}
               totalCost={props.totalCost}
               updateOrders={props.updateOrders}
+              handleRemoveProduct={props.handleRemoveProduct}
+              decrementCounter={props.decrementCounter}
+              incrementCounter={props.incrementCounter}
             />
           }
         />

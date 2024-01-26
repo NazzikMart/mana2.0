@@ -6,7 +6,7 @@ import "../../../index.css";
 import "../../media.css";
 
 const App = () => {
-  const [product] = useState(products.product);
+  const [product , setProduct] = useState(products.product);
   const [orders, setOrders] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
   const [infoProducts, setInfoProducts] = useState([]);
@@ -184,6 +184,50 @@ const App = () => {
     filterByPcrice();
   };
 
+  const incrementCounter = (productId, price) => {
+    const updatedOrders = orders.map((order) => {
+      if (order.id === productId) {
+        const newCounter = order.counter + 1;
+        if (newCounter >= 1) {
+          return { ...order, counter: newCounter };
+        }
+      }
+      return order;
+    });
+
+    const totalCost = updatedOrders.reduce((accumulator, order) => {
+      return accumulator + order.price * order.counter;
+    }, 0);
+
+    updateOrders(updatedOrders, totalCost);
+  };
+
+  const decrementCounter = (productId, price) => {
+    const updatedOrders = orders.map((order) => {
+      if (order.id === productId) {
+        const newCounter = order.counter - 1;
+        if (newCounter >= 1) {
+          return { ...order, counter: newCounter };
+        } else {
+          return null;
+        }
+      }
+      return order;
+    });
+
+    const filteredOrders = updatedOrders.filter((order) => order !== null);
+
+    const totalCost = filteredOrders.reduce((accumulator, order) => {
+      return accumulator + order.price * order.counter;
+    }, 0);
+
+    updateOrders(filteredOrders, totalCost);
+  };
+
+  const handleRemoveProduct = (productId) => {
+  removeProduct(productId);
+  };
+
   return (
     <div className="App">
       <Navbar
@@ -210,6 +254,9 @@ const App = () => {
         choseCategory={choseCategory}
         handleSearch={handleSearch}
         choseCategoryNew={choseCategoryNew}
+        handleRemoveProduct = {handleRemoveProduct}
+        decrementCounter = {decrementCounter}
+        incrementCounter = {incrementCounter}
       />
       <Footer />
     </div>
