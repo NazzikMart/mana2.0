@@ -16,8 +16,30 @@ const HomePage = (props) => {
       <Header />
       <span className="BestSellersName">Лідери продажів</span>
       <FilterProduct
-        choseCategory={props.choseCategory}
+        product={props.product}
+        addToOrder={props.addToOrder}
+        infoProduct={props.infoProduct}
+        infoProducts={props.infoProducts}
+        searchTerm={props.searchTerm}
+        searchResults={props.searchResults}
+        addClass={props.addClass}
+        currentItems={props.currentItems}
+        choseProducer={props.choseProducer}
+        renderCart={props.renderCart}
+        orders={props.orders}
+        removeProduct={props.removeProduct}
+        counter={props.counter}
+        totalCost={props.totalCost}
+        updateOrders={props.updateOrders}
+        services={props.services}
         categories={props.categories}
+        minPrice={props.minPrice}
+        maxPrice={props.maxPrice}
+        producers={props.producers}
+        selectedProducers={props.selectedProducers}
+        showFunction={props.showFunction}
+        choseCategory={props.choseCategory}
+        handleSearch={props.handleSearch}
       />
       <BestSellers
         product={props.product}

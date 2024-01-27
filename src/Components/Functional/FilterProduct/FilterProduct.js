@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import "./FilterProduct.css";
 
-
 const FilterProduct = (props) => {
-
-
+  console.log(props.categories)
   return (
     <div className="FilterProduct">
       {props.categories.map((item) => (

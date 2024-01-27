@@ -6,7 +6,7 @@ import "../../../index.css";
 import "../../media.css";
 
 const App = () => {
-  const [product , setProduct] = useState(products.product);
+  const [product, setProduct] = useState(products.product);
   const [orders, setOrders] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
   const [infoProducts, setInfoProducts] = useState([]);
@@ -91,8 +91,6 @@ const App = () => {
     setInfoProducts([item]);
   };
 
- 
-
   const removeProduct = (productId) => {
     setOrders((prevOrders) =>
       prevOrders.filter((order) => order.id !== productId)
@@ -109,6 +107,7 @@ const App = () => {
   };
   const choseCategory = (category, heading) => {
     if (category === "all") {
+      
       setCurrentItems(product);
     } else {
       setCurrentItems(
@@ -139,14 +138,6 @@ const App = () => {
     setSearchResults(results);
   };
 
-  const handleMinPriceChange = (event) => {
-    setMinPrice(event.target.value);
-  };
-
-  const handleMaxPriceChange = (event) => {
-    setMaxPrice(event.target.value);
-  };
-
   const filterByPcrice = () => {
     if (minPrice !== "" && maxPrice !== "") {
       const FilterProductPrice = currentItems.filter((el) => {
@@ -173,10 +164,6 @@ const App = () => {
     } else {
       setSelectedProducers([...selectedProducers, producer]);
     }
-  };
-
-  const renderElement = (el) => {
-    setNewItem([...newItem, el]);
   };
 
   const showFunction = () => {
@@ -225,7 +212,7 @@ const App = () => {
   };
 
   const handleRemoveProduct = (productId) => {
-  removeProduct(productId);
+    removeProduct(productId);
   };
 
   return (
@@ -254,9 +241,9 @@ const App = () => {
         choseCategory={choseCategory}
         handleSearch={handleSearch}
         choseCategoryNew={choseCategoryNew}
-        handleRemoveProduct = {handleRemoveProduct}
-        decrementCounter = {decrementCounter}
-        incrementCounter = {incrementCounter}
+        handleRemoveProduct={handleRemoveProduct}
+        decrementCounter={decrementCounter}
+        incrementCounter={incrementCounter}
       />
       <Footer />
     </div>

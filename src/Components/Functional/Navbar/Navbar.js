@@ -86,6 +86,7 @@ const Navbar = (props) => {
               handleRemoveProduct={props.handleRemoveProduct}
               decrementCounter={props.decrementCounter}
               incrementCounter={props.incrementCounter}
+              
             />
           }
         />

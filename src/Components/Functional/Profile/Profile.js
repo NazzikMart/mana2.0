@@ -2,23 +2,20 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import "./Profile.css";
 import { Link } from "react-router-dom";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { auth } from "./firebase";
-
+import axios from "axios";
 
 export default function Profile() {
-  function handlerLogin() {
-    setIsAcount(!isAccount);
-  }
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [isAccount, setIsAcount] = useState(true);
 
   const handleRegistration = async (data) => {
     try {
-      await createUserWithEmailAndPassword(auth, data.email, data.password);
+      const response = await axios.post("http://localhost:3001/register", data);
+      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -26,7 +23,8 @@ export default function Profile() {
 
   const handleLogin = async (data) => {
     try {
-      await signInWithEmailAndPassword(auth, data.email, data.password);
+      const response = await axios.post("http://localhost:3001/login", data);
+      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -44,35 +42,32 @@ export default function Profile() {
           onSubmit={handleSubmit(handleRegistration)}
         >
           <h2 className="register-name">Реєстрація</h2>
-          <div className="profile-reg-name">
-            <input
-              className="reg-name"
-              placeholder="Введіть своє ім'я"
-              {...register("firstName")}
-              type="text"
-            />
-          </div>
-          <div className="profile-reg-number">
-            <input
-              className="reg-number"
-              placeholder="Введіть номер телефону"
-              {...register("number")}
-              type="phone"
-            />
-          </div>
-          <div className="profile-reg-password">
-            <input
-              className="reg-password"
-              placeholder="Придумайте пароль"
-              {...register("password")}
-              type="text"
-            />
-          </div>
+          <input
+            className="reg-name"
+            placeholder="Введіть своє ім'я"
+            {...register("firstName", { required: true })}
+            type="text"
+          />
+          {errors.firstName && <p>Ім'я обов'язкове</p>}
+          <input
+            className="reg-number"
+            placeholder="Введіть номер телефону"
+            {...register("number", { required: true, pattern: /^[0-9\b]+$/ })}
+            type="phone"
+          />
+          {errors.number && <p>Недійсний номер телефону</p>}
+          <input
+            className="reg-password"
+            placeholder="Придумайте пароль"
+            {...register("password", { required: true, minLength: 6 })}
+            type="password"
+          />
+          {errors.password && <p>Пароль повинен бути принаймні 6 символів</p>}
           <div className="profile-btn-reg">
             <button className="btn-reg">Реєстрація</button>
           </div>
           <div className="profile-btn-log">
-            <button className="btn-log" onClick={handlerLogin}>
+            <button className="btn-log" onClick={toggleAccount}>
               Увійти
             </button>
           </div>
@@ -80,15 +75,20 @@ export default function Profile() {
       ) : (
         <form className="profile-login" onSubmit={handleSubmit(handleLogin)}>
           <h2 className="login-name">Увійти</h2>
-          <div className="profile-log-number">
-            <input
-              className="log-number"
-              placeholder="Введіть номер телефону"
-            />
-          </div>
-          <div className="profile-log-password">
-            <input className="log-password" placeholder="Введіть пароль" />
-          </div>
+          <input
+            className="log-number"
+            placeholder="Введіть номер телефону"
+            {...register("number", { required: true, pattern: /^[0-9\b]+$/ })}
+            type="phone"
+          />
+          {errors.number && <p>Недійсний номер телефону</p>}
+          <input
+            className="log-password"
+            placeholder="Введіть пароль"
+            {...register("password", { required: true })}
+            type="password"
+          />
+          {errors.password && <p>Пароль обов'язковий</p>}
           <div className="profile-btn-log">
             <Link
               to="/user"

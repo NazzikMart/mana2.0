@@ -4,13 +4,6 @@ import "../../media.css";
 import Card from "../../UI/Card/Card";
 
 const BestSellers = (props) => {
-  const [toggle, setToggle] = useState(false);
-
-  const addClass = (e) => {
-    setToggle(!toggle);
-    e.target.style.color = toggle ? "black" : "red";
-  };
-
   return (
     <div className="BestSellersWrapper">
       <div className="BestSellers">
