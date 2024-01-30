@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useForm } from "react";
 import Navbar from "../Navbar/Navbar.js";
 import Footer from "../../UI/Footer/Footer.js";
 import products from "../../../product.json";
 import "../../../index.css";
 import "../../media.css";
+import axios from "axios";
 
 const App = () => {
   const [product, setProduct] = useState(products.product);
@@ -72,6 +73,42 @@ const App = () => {
         "Можна купити будь який наш товар в кредит або митєву розтрочку",
     },
   ];
+  const [userData, setUserData] = useState({
+    firstName: "",
+    number: "",
+    password: "",
+  });
+
+
+  const [isAccount, setIsAcount] = useState(true);
+
+  const handleRegistration = async (data) => {
+    try {
+      const response = await axios.post("http://localhost:3001/register", data);
+      console.log(response.data);
+      setUserData({
+        firstName: data.firstName,
+        number: data.number,
+        password: data.password,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleLogin = async (data) => {
+    try {
+      const response = await axios.post("http://localhost:3001/login", data);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const toggleAccount = () => {
+    setIsAcount(!isAccount);
+  };
+  console.log(userData);
 
   const addToOrder = (item) => {
     const isItemInOrder = orders.some((orderItem) => orderItem.id === item.id);
@@ -107,7 +144,6 @@ const App = () => {
   };
   const choseCategory = (category, heading) => {
     if (category === "all") {
-      
       setCurrentItems(product);
     } else {
       setCurrentItems(
@@ -150,7 +186,7 @@ const App = () => {
   const filterByProducer = () => {
     if (selectedProducers.length > 0) {
       const filteredProducts = product.filter((el) =>
-        selectedProducers.includes(el.producer)
+        selectedProducers.includes(el.producerц)
       );
       setCurrentItems(filteredProducts);
     } else {
@@ -244,6 +280,11 @@ const App = () => {
         handleRemoveProduct={handleRemoveProduct}
         decrementCounter={decrementCounter}
         incrementCounter={incrementCounter}
+        handleRegistration={handleRegistration}
+        handleLogin={handleLogin}
+        toggleAccount={toggleAccount}
+        isAccount={isAccount}
+        userData={userData}
       />
       <Footer />
     </div>

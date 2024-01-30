@@ -112,3 +112,14 @@
     text-decoration: none;
     color: white;
 }
+
+@media screen and  (max-width : 520px){
+    .reg-name , .reg-number , .reg-password  , .btn-log , .log-number , .log-password  {
+        width: 100%;
+    }
+    .btn-reg , .btn-log {
+        width: 100%;
+        padding-left: 90px;
+        padding-right: 90px;
+    }
+}

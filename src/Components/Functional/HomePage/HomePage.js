@@ -81,24 +81,24 @@ const HomePage = (props) => {
           </div>
           <div className="product-item">
             <div className="product-item__img">
-              <img className="product-item__images" src={ip1} alt="" />
+              <img className="product-item__images" src={ip2} alt="" />
             </div>
-            <div className="product-item__name">Gold</div>
-            <div className="product-item__desc">Золотий</div>
+            <div className="product-item__name">Gray</div>
+            <div className="product-item__desc">Сірий</div>
           </div>
           <div className="product-item">
             <div className="product-item__img">
-              <img className="product-item__images" src={ip1} alt="" />
+              <img className="product-item__images" src={ip3} alt="" />
             </div>
-            <div className="product-item__name">Gold</div>
-            <div className="product-item__desc">Золотий</div>
+            <div className="product-item__name">Purple</div>
+            <div className="product-item__desc">Фіолетовий</div>
           </div>
           <div className="product-item">
             <div className="product-item__img">
-              <img className="product-item__images" src={ip1} alt="" />
+              <img className="product-item__images" src={ip4} alt="" />
             </div>
-            <div className="product-item__name">Gold</div>
-            <div className="product-item__desc">Золотий</div>
+            <div className="product-item__name">White</div>
+            <div className="product-item__desc">Білий</div>
           </div>
         </div>
       </div>

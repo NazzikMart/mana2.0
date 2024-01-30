@@ -4,42 +4,18 @@ import "./Profile.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-export default function Profile() {
+export default function Profile(props) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [isAccount, setIsAcount] = useState(true);
-
-  const handleRegistration = async (data) => {
-    try {
-      const response = await axios.post("http://localhost:3001/register", data);
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleLogin = async (data) => {
-    try {
-      const response = await axios.post("http://localhost:3001/login", data);
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const toggleAccount = () => {
-    setIsAcount(!isAccount);
-  };
-
   return (
     <div className="forms">
-      {isAccount ? (
+      {props.isAccount ? (
         <form
           className="profile-register"
-          onSubmit={handleSubmit(handleRegistration)}
+          onSubmit={handleSubmit(props.handleRegistration)}
         >
           <h2 className="register-name">Реєстрація</h2>
           <input
@@ -64,16 +40,16 @@ export default function Profile() {
           />
           {errors.password && <p>Пароль повинен бути принаймні 6 символів</p>}
           <div className="profile-btn-reg">
-            <button className="btn-reg">Реєстрація</button>
+            <button  className="btn-reg">Реєстрація</button>
           </div>
           <div className="profile-btn-log">
-            <button className="btn-log" onClick={toggleAccount}>
+            <button className="btn-log" onClick={props.toggleAccount}>
               Увійти
             </button>
           </div>
         </form>
       ) : (
-        <form className="profile-login" onSubmit={handleSubmit(handleLogin)}>
+        <form className="profile-login" onSubmit={handleSubmit(props.handleLogin)}>
           <h2 className="login-name">Увійти</h2>
           <input
             className="log-number"
@@ -93,7 +69,7 @@ export default function Profile() {
             <Link
               to="/user"
               className="btn-log log-user"
-              onClick={toggleAccount}
+              onClick={props.toggleAccount}
             >
               Увійти
             </Link>

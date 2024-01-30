@@ -86,13 +86,12 @@ const Navbar = (props) => {
               handleRemoveProduct={props.handleRemoveProduct}
               decrementCounter={props.decrementCounter}
               incrementCounter={props.incrementCounter}
-              
             />
           }
         />
         <Route path="/about" element={<About />} />
         <Route path="/remont" element={<Remont />} />
-        <Route path="/user" element={<User />} />
+        <Route path="/user" element={<User userData={props.userData} />} />
 
         <Route
           path="/purchase"
@@ -154,7 +153,19 @@ const Navbar = (props) => {
             />
           }
         />
-        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/profile"
+          element={
+            <Profile
+              handleRegistration={props.handleRegistration}
+              handleLogin={props.handleLogin}
+              toggleAccount={props.toggleAccount}
+              isAccount={props.isAccount}
+              handleSubmit={props.handleSubmit}
+              register={props.register}
+            />
+          }
+        />
         <Route
           path="/product"
           element={

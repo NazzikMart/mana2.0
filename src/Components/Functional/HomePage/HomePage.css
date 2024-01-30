@@ -69,3 +69,18 @@
 .btn-shop-ip:hover{
     background-color: black;
 }
+
+
+@media screen and (max-width : 1192px) {
+    .product-items{
+        flex-wrap: wrap;
+    }
+    .product-item{
+        width: 80%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .product-item__images{
+        width: 50%;
+    }
+}
