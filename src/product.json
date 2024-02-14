@@ -8,7 +8,8 @@
     "counter": 1,
     "producer": "Poco",
     "heading": "phone",
-    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/import/3791650014461147.jpg"
+    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/import/3791650014461147.jpg",
+    "description": "Елегантний чайник SilverCrest від виробника Poco. Має велику потужність і стильний дизайн."
   },
   {
     "id": 16,
@@ -19,7 +20,8 @@
     "counter": 1,
     "producer": "Poco",
     "heading": "phone",
-    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/1/2/123_11_36.jpg"
+    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/1/2/123_11_36.jpg",
+    "description": "Остання модель телефону SilverCrest від виробника Poco. Оснащений найновішими функціями та камерами високої роздільної здатності."
   },
   {
     "id": 17,
@@ -30,7 +32,8 @@
     "counter": 1,
     "producer": "Poco",
     "heading": "phone",
-    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/g/c/gc772d30-1.jpg"
+    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/g/c/gc772d30-1.jpg",
+    "description": "Практичний гриль SilverCrest для вашого дому від виробника Poco. Ідеально підходить для приготування смачних страв на відкритому повітрі або в приміщенні."
   },
   {
     "id": 18,
@@ -41,7 +44,8 @@
     "counter": 1,
     "producer": "Poco",
     "heading": "phone",
-    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/1/5/1574995.jpg"
+    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/1/5/1574995.jpg",
+    "description": "Потужна мікрохвильовка SilverCrest від виробника Poco. Швидко нагріває їжу та має зручне керування."
   },
   {
     "id": 19,
@@ -52,62 +56,8 @@
     "counter": 1,
     "producer": "Poco",
     "heading": "phone",
-    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/3/2/3214_2211400052.1200x1200.jpg"
-  },
-  {
-    "id": 20,
-    "name": "Термокружка 1",
-    "price": "1100.00",
-    "model": "SilverCrest",
-    "category": "ThermalMug",
-    "counter": 1,
-    "producer": "Poco",
-    "heading": "phone",
-    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/1/7/176588385_images_16495315817.jpg"
-  },
-  {
-    "id": 21,
-    "name": "Термокружка 2",
-    "price": "1100.00",
-    "model": "SilverCrest",
-    "category": "ThermalMug",
-    "counter": 1,
-    "producer": "Poco",
-    "heading": "phone",
-    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/1/7/176588385_images_16495315817.jpg"
-  },
-  {
-    "id": 22,
-    "name": "Термокружка 3",
-    "price": "1100.00",
-    "model": "SilverCrest",
-    "category": "ThermalMug",
-    "counter": 1,
-    "producer": "Poco",
-    "heading": "phone",
-    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/1/7/176588385_images_16495315817.jpg"
-  },
-  {
-    "id": 23,
-    "name": "Термокружка 4",
-    "price": "1100.00",
-    "model": "SilverCrest",
-    "category": "ThermalMug",
-    "counter": 1,
-    "producer": "Poco",
-    "heading": "phone",
-    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/1/7/176588385_images_16495315817.jpg"
-  },
-  {
-    "id": 24,
-    "name": "Термокружка 5",
-    "price": "1100.00",
-    "model": "SilverCrest",
-    "category": "ThermalMug",
-    "counter": 1,
-    "producer": "Poco",
-    "heading": "phone",
-    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/1/7/176588385_images_16495315817.jpg"
+    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/3/2/3214_2211400052.1200x1200.jpg",
+    "description": "Потужний пилосос SilverCrest від виробника Poco. Ідеально підходить для прибирання будинку та офісу."
   },
   {
     "id": 25,
@@ -118,7 +68,8 @@
     "counter": 1,
     "producer": "Poco",
     "heading": "phone",
-    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/import/3791650014461147.jpg"
+    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/import/3791650014461147.jpg",
+    "description": "Елегантний чайник SilverCrest від виробника Poco. Має велику потужність і стильний дизайн."
   },
   {
     "id": 26,
@@ -129,72 +80,7 @@
     "counter": 1,
     "producer": "Poco",
     "heading": "phone",
-    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/1/2/123_11_36.jpg"
-  },
-  {
-    "id": 27,
-    "name": "Гриль",
-    "price": "1100.00",
-    "model": "SilverCrest",
-    "category": "Grill",
-    "counter": 1,
-    "producer": "Poco",
-    "heading": "phone",
-    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/g/c/gc772d30-1.jpg"
-  },
-  {
-    "id": 28,
-    "name": "Мікрохвильовка",
-    "price": "1100.00",
-    "model": "SilverCrest",
-    "category": "Microwave",
-    "counter": 1,
-    "producer": "Poco",
-    "heading": "phone",
-    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/1/5/1574995.jpg"
-  },
-  {
-    "id": 29,
-    "name": "Чайник",
-    "price": "1100.00",
-    "model": "SilverCrest",
-    "category": "Kettle",
-    "counter": 1,
-    "producer": "Poco",
-    "heading": "phone",
-    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/import/3791650014461147.jpg"
-  },
-  {
-    "id": 30,
-    "name": "Телефон",
-    "price": "5600.00",
-    "model": "SilverCrest",
-    "category": "telephone",
-    "counter": 1,
-    "producer": "Poco",
-    "heading": "phone",
-    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/1/2/123_11_36.jpg"
-  },
-  {
-    "id": 31,
-    "name": "Гриль",
-    "price": "1100.00",
-    "model": "SilverCrest",
-    "category": "Grill",
-    "counter": 1,
-    "producer": "Poco",
-    "heading": "phone",
-    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/g/c/gc772d30-1.jpg"
-  },
-  {
-    "id": 32,
-    "name": "Мікрохвильовка",
-    "price": "1100.00",
-    "model": "SilverCrest",
-    "category": "Microwave",
-    "counter": 1,
-    "producer": "Poco",
-    "heading": "phone",
-    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/1/5/1574995.jpg"
+    "img": "https://i.allo.ua/media/catalog/product/cache/3/image/710x600/602f0fa2c1f0d1ba5e241f914e856ff9/1/2/123_11_36.jpg",
+    "description": "Остання модель телефону SilverCrest від виробника Poco. Оснащений найновішими функціями та камерами високої роздільної здатності."
   }
 ]}

@@ -2,7 +2,8 @@ const express = require("express");
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
 const { check, validationResult } = require("express-validator");
-
+const bcrypt = require("bcrypt");
+const saltRounds = 10; 
 const app = express();
 const port = 3001;
 
@@ -53,20 +54,27 @@ app.post("/register", registrationValidation, (req, res) => {
 
   const { firstName, number, password } = req.body;
 
-  db.query(
-    "INSERT INTO users (first_name, phone_number, password) VALUES (?, ?, ?)",
-    [firstName, number, password],
-    (err, result) => {
-      if (err) {
-        console.error("Помилка виконання запиту:", err);
-        res.status(500).send("Внутрішня помилка сервера");
-      } else {
-        res
-          .status(200)
-          .json({ userId: result.insertId, message: "Реєстрація успішна" });
-      }
+  bcrypt.hash(password, saltRounds, (err, hashedPassword) => {
+    if (err) {
+      console.error("Помилка хешування паролю:", err);
+      return res.status(500).send("Внутрішня помилка сервера");
     }
-  );
+
+    db.query(
+      "INSERT INTO users (first_name, phone_number, password) VALUES (?, ?, ?)",
+      [firstName, number, hashedPassword],
+      (err, result) => {
+        if (err) {
+          console.error("Помилка виконання запиту:", err);
+          res.status(500).send("Внутрішня помилка сервера");
+        } else {
+          res
+            .status(200)
+            .json({ userId: result.insertId, message: "Реєстрація успішна" });
+        }
+      }
+    );
+  });
 });
 
 app.post("/register", registrationValidation, (req, res) => {

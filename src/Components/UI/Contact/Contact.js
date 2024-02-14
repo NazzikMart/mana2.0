@@ -1,18 +1,51 @@
 import React from "react";
 import "./Contact.css";
-import { useForm, Controller } from "react-hook-form";
+import axios from "axios";
 import { useState } from "react";
 
 const Contact = () => {
-  const {
-    control,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => {
-    // Логіка відправлення даних
-    console.log(data);
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    comment: "",
+  });
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:3003/api/contactDate/",
+        formData
+      );
+
+      console.log(response.data.message);
+      // Очистити дані форми після успішного відправлення
+      setFormData({
+        name: "",
+        phone: "",
+        comment: "",
+      });
+    } catch (error) {
+      console.error("Помилка при відправці даних на сервер:", error.message);
+      // Обробка помилок відправки
+      if (error.response) {
+        // Помилка від сервера (запит не успішний)
+        console.error("Статус помилки:", error.response.status);
+      } else if (error.request) {
+        // Немає відповіді від сервера (запит не відправлено)
+        console.error("Запит не був відправлений:", error.request);
+      } else {
+        // Інші помилки
+        console.error("Помилка:", error.message);
+      }
+      // Встановити помилки для відображення на сторінці
+      setErrors({ submit: "Помилка при відправці форми. Будь ласка, спробуйте ще раз." });
+    }
   };
   return (
     <div className="contact">
@@ -63,72 +96,32 @@ const Contact = () => {
             Отримайте консультацію по товарах прямо зараз!
           </span>
           <span className="contact-form-desc">Доступно 24 години на добу!</span>
-          <form className="form-contact" onSubmit={handleSubmit(onSubmit)}>
-            <Controller
+          <form className="form-contact" onSubmit={handleSubmit}>
+            <input
+              type="text"
               name="name"
-              control={control}
-              defaultValue=""
-              rules={{
-                required: "Будь ласка, введіть ім'я",
-              }}
-              render={({ field }) => (
-                <>
-                  <input
-                    type="text"
-                    placeholder="Введіть своє ім'я"
-                    className="form-contact-name"
-                    {...field}
-                  />
-                  {errors.name && (
-                    <p className="error-message">{errors.name.message}</p>
-                  )}
-                </>
-              )}
+              placeholder="Введіть своє ім'я"
+              className="form-contact-name"
+              value={formData.name}
+              onChange={handleChange}
             />
-
-            <Controller
+            <input
+              type="tel"
               name="phone"
-              control={control}
-              defaultValue=""
-              rules={{
-                required: "Будь ласка, введіть номер телефону",
-              }}
-              render={({ field }) => (
-                <>
-                  <input
-                    type="tel"
-                    placeholder="Введіть свій номер телефону"
-                    className="form-contact-phone"
-                    {...field}
-                  />
-                  {errors.phone && (
-                    <p className="error-message">{errors.phone.message}</p>
-                  )}
-                </>
-              )}
+              placeholder="Введіть свій номер телефону"
+              className="form-contact-phone"
+              value={formData.phone}
+              onChange={handleChange}
             />
-
-            <Controller
+            <textarea
               name="comment"
-              control={control}
-              defaultValue=""
-              rules={{
-                required: "Коментар має містити принаймні 5 символів",
-              }}
-              render={({ field }) => (
-                <>
-                  <textarea
-                    placeholder="Напишіть, який саме товар вас цікавить"
-                    className="form-contact-comment"
-                    {...field}
-                  />
-                  {errors.comment && (
-                    <p className="error-message">{errors.comment.message}</p>
-                  )}
-                </>
-              )}
+              placeholder="Напишіть, який саме товар вас цікавить"
+              className="form-contact-comment"
+              value={formData.comment}
+              onChange={handleChange}
             />
-
+            {/* Показати помилки відправки форми, якщо є */}
+            {errors.submit && <p className="error-message">{errors.submit}</p>}
             <button type="submit" className="form-contact-button">
               Отримати консультацію
             </button>

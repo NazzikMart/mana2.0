@@ -1,11 +1,11 @@
-import React, { useState, useForm } from "react";
+import React, { useState  , createContext } from "react";
 import Navbar from "../Navbar/Navbar.js";
 import Footer from "../../UI/Footer/Footer.js";
 import products from "../../../product.json";
 import "../../../index.css";
-import "../../media.css";
 import axios from "axios";
 
+export const AppContext = createContext();
 const App = () => {
   const [product, setProduct] = useState(products.product);
   const [orders, setOrders] = useState([]);
@@ -29,7 +29,6 @@ const App = () => {
   ]);
 
   const [currentItems, setCurrentItems] = useState([...product]);
-  const [newItem, setNewItem] = useState([]);
   const [maxPrice, setMaxPrice] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
@@ -78,7 +77,6 @@ const App = () => {
     number: "",
     password: "",
   });
-
 
   const [isAccount, setIsAcount] = useState(true);
 
@@ -249,6 +247,39 @@ const App = () => {
 
   const handleRemoveProduct = (productId) => {
     removeProduct(productId);
+  };
+  const contextValues = {
+    product,
+    addToOrder,
+    orders,
+    removeProduct,
+    totalCost,
+    infoProduct,
+    infoProducts,
+    updateOrders,
+    searchResults,
+    services,
+    renderCart,
+    searchTerm,
+    currentItems,
+    choseProducer,
+    categories,
+    minPrice,
+    maxPrice,
+    producers,
+    selectedProducers,
+    showFunction,
+    choseCategory,
+    handleSearch,
+    choseCategoryNew,
+    handleRemoveProduct,
+    decrementCounter,
+    incrementCounter,
+    handleRegistration,
+    handleLogin,
+    toggleAccount,
+    isAccount,
+    userData,
   };
 
   return (

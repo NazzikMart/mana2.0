@@ -9,7 +9,6 @@
 .category-item {
     cursor: pointer;
     background: #550486;
-
     display: inline-block;
     padding: 10px 20px;
     border-radius: 5px;
@@ -25,7 +24,7 @@
     background-color: rgb(122, 122, 122);
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 1400px) {
 
     .FilterProduct {
         flex-direction: column;

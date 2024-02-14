@@ -2,6 +2,7 @@ import React from "react";
 import "./Purchase.css";
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
+import axios from "axios"; // Додали axios для відправки запитів на сервер
 
 const Purchase = (props) => {
   const [totalSum, setTotalSum] = useState(0);
@@ -9,20 +10,15 @@ const Purchase = (props) => {
     register,
     handleSubmit,
     control,
-    setValue , 
+    setValue,
     formState: { errors },
     watch,
   } = useForm();
 
-  const onSubmit = (data) => {
-    // Логіка відправлення даних
-    console.log(data);
-  };
-
   const calculateTotalSum = () => {
     let sum = 0;
     props.orders.forEach((el) => {
-      sum += el.price;
+      sum += Number(el.price) * el.counter; // Помножимо ціну товару на його кількість
     });
     setTotalSum(sum);
   };
@@ -30,79 +26,95 @@ const Purchase = (props) => {
   React.useEffect(() => {
     calculateTotalSum();
   }, [props.orders]);
+
+  const handleSubmitOrder = () => {
+    const orderData = props.orders.map((order) => ({
+      productId: order.id,
+      quantity: order.counter,
+      // Якщо ви хочете також включити інші дані товару, такі як назва, ціна, то можете додати їх сюди
+    }));
+
+    axios.post('/api/orders', { orderData })
+      .then(response => {
+        console.log(response.data);
+        // Додаткові дії після успішного замовлення
+      })
+      .catch(error => {
+        console.error('Помилка відправки замовлення:', error);
+      });
+  };
+
   const deliveryMethod = watch("deliveryMethod");
+
   console.log(props.orders);
   return (
     <div className="purchase-wrapper">
       <div className="contacts-datails-items">
         <div className="contacts-date-items">
           <span className="contacts-date-item-name ">Контактні дані</span>
-          <form className="contacts-date-item-form"  onSubmit={handleSubmit(onSubmit)}>
-          <Controller
-          name="name"
-          control={control}
-          defaultValue=""
-          rules={{ required: "Будь ласка, введіть ім'я" }}
-          render={({ field }) => (
-            <>
-              <input
-                className="contacts-date-item-form-name"
-                placeholder="Введіть ім'я"
-                {...field}
-              />
-              {errors.name && (
-                <p className="error-message">{errors.name.message}</p>
-              )}
-            </>
-          )}
-        />
+          <form
+            className="contacts-date-item-form"
+            onSubmit={handleSubmit(handleSubmitOrder)}
+          >
             <Controller
-          name="phoneNumber"
-          control={control}
-          defaultValue=""
-          rules={{
-            required: "Будь ласка, введіть номер телефону",
-            pattern: {
-              value: /^[0-9\b]+$/,
-              message: "Недійсний номер телефону",
-            },
-          }}
-          render={({ field }) => (
-            <>
-              <input
-                className="contacts-date-item-form-number"
-                placeholder="Введіть номер телефону"
-                {...field}
-              />
-              {errors.phoneNumber && (
-                <p className="error-message">
-                  {errors.phoneNumber.message}
-                </p>
+              name="name"
+              control={control}
+              defaultValue=""
+              rules={{ required: "Будь ласка, введіть ім'я" }}
+              render={({ field }) => (
+                <>
+                  <input
+                    className="contacts-date-item-form-name"
+                    placeholder="Введіть ім'я"
+                    {...field}
+                  />
+                  {errors.name && (
+                    <p className="error-message">{errors.name.message}</p>
+                  )}
+                </>
               )}
-            </>
-          )}
-        />
+            />
+            <Controller
+              name="phoneNumber"
+              control={control}
+              defaultValue=""
+              rules={{
+                required: "Будь ласка, введіть номер телефону",
+                pattern: {
+                  value: /^[0-9\b]+$/,
+                  message: "Недійсний номер телефону",
+                },
+              }}
+              render={({ field }) => (
+                <>
+                  <input
+                    className="contacts-date-item-form-number"
+                    placeholder="Введіть номер телефону"
+                    {...field}
+                  />
+                  {errors.phoneNumber && (
+                    <p className="error-message">
+                      {errors.phoneNumber.message}
+                    </p>
+                  )}
+                </>
+              )}
+            />
           </form>
         </div>
 
         <div className="delivery-date-items">
           <span className="delivery-date-item-name">Спосіб доставки</span>
           <form className="delivery-date-item-form">
-          <Controller
+            <Controller
               name="deliveryMethod"
               control={control}
               defaultValue=""
               rules={{ required: "Будь ласка, оберіть спосіб доставки" }}
               render={({ field }) => (
                 <>
-                  <select
-                    className="delivery-date-item-form-select"
-                    {...field}
-                  >
-                    <option
-                      className="delivery-date-item-form-option"
-                      value=""
-                    >
+                  <select className="delivery-date-item-form-select" {...field}>
+                    <option className="delivery-date-item-form-option" value="">
                       Оберіть спосіб доставки
                     </option>
                     <option
@@ -128,7 +140,9 @@ const Purchase = (props) => {
                   name="npOffice"
                   control={control}
                   defaultValue=""
-                  rules={{ required: "Будь ласка, оберіть відділення Нової Пошти" }}
+                  rules={{
+                    required: "Будь ласка, оберіть відділення Нової Пошти",
+                  }}
                   render={({ field }) => (
                     <>
                       <select
@@ -168,66 +182,79 @@ const Purchase = (props) => {
           </form>
         </div>
         <div className="payment-date-items">
-      <span className="payment-date-item-name">Оплата</span>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="payment-date-item payment-date-item-post">
-          <input
-            type="radio"
-            {...register("paymentMethod", { required: "Будь ласка, оберіть спосіб оплати" })}
-            onChange={() => setValue("paymentMethod", "payment-post")}
-            checked={watch("paymentMethod") === "payment-post"}
-          />
-          <span>Оплата під час отримання</span>
-        </div>
+          <span className="payment-date-item-name">Оплата</span>
+          <form onSubmit={handleSubmit(handleSubmitOrder)}>
+            <div className="payment-date-item payment-date-item-post">
+              <input
+                type="radio"
+                {...register("paymentMethod", {
+                  required: "Будь ласка, оберіть спосіб оплати",
+                })}
+                onChange={() => setValue("paymentMethod", "payment-post")}
+                checked={watch("paymentMethod") === "payment-post"}
+              />
+              <span>Оплата під час отримання</span>
+            </div>
 
-        <div className="payment-date-item payment-date-item-privatpay">
-          <input
-            type="radio"
-            {...register("paymentMethod", { required: "Будь ласка, оберіть спосіб оплати" })}
-            onChange={() => setValue("paymentMethod", "payment-privatpay")}
-            checked={watch("paymentMethod") === "payment-privatpay"}
-          />
-          <span>PrivatPay</span>
-        </div>
+            <div className="payment-date-item payment-date-item-privatpay">
+              <input
+                type="radio"
+                {...register("paymentMethod", {
+                  required: "Будь ласка, оберіть спосіб оплати",
+                })}
+                onChange={() => setValue("paymentMethod", "payment-privatpay")}
+                checked={watch("paymentMethod") === "payment-privatpay"}
+              />
+              <span>PrivatPay</span>
+            </div>
 
-        <div className="payment-date-item payment-date-item-googlepay">
-          <input
-            type="radio"
-            {...register("paymentMethod", { required: "Будь ласка, оберіть спосіб оплати" })}
-            onChange={() => setValue("paymentMethod", "payment-googlepay")}
-            checked={watch("paymentMethod") === "payment-googlepay"}
-          />
-          <span>GooglePay</span>
-        </div>
+            <div className="payment-date-item payment-date-item-googlepay">
+              <input
+                type="radio"
+                {...register("paymentMethod", {
+                  required: "Будь ласка, оберіть спосіб оплати",
+                })}
+                onChange={() => setValue("paymentMethod", "payment-googlepay")}
+                checked={watch("paymentMethod") === "payment-googlepay"}
+              />
+              <span>GooglePay</span>
+            </div>
 
-        <div className="payment-date-item payment-date-item-mastercard">
-          <input
-            type="radio"
-            {...register("paymentMethod", { required: "Будь ласка, оберіть спосіб оплати" })}
-            onChange={() => setValue("paymentMethod", "payment-mastercard")}
-            checked={watch("paymentMethod") === "payment-mastercard"}
-          />
-          <span>Visa / MasterCard</span>
-        </div>
+            <div className="payment-date-item payment-date-item-mastercard">
+              <input
+                type="radio"
+                {...register("paymentMethod", {
+                  required: "Будь ласка, оберіть спосіб оплати",
+                })}
+                onChange={() => setValue("paymentMethod", "payment-mastercard")}
+                checked={watch("paymentMethod") === "payment-mastercard"}
+              />
+              <span>Visa / MasterCard</span>
+            </div>
 
-        <div className="payment-date-item payment-date-item-portmone">
-          <input
-            type="radio"
-            {...register("paymentMethod", { required: "Будь ласка, оберіть спосіб оплати" })}
-            onChange={() => setValue("paymentMethod", "payment-portmone")}
-            checked={watch("paymentMethod") === "payment-portmone"}
-          />
-          <span>Portmone.com</span>
-        </div>
+            <div className="payment-date-item payment-date-item-portmone">
+              <input
+                type="radio"
+                {...register("paymentMethod", {
+                  required: "Будь ласка, оберіть спосіб оплати",
+                })}
+                onChange={() => setValue("paymentMethod", "payment-portmone")}
+                checked={watch("paymentMethod") === "payment-portmone"}
+              />
+              <span>Portmone.com</span>
+            </div>
 
-        {errors.paymentMethod && (
-          <p className="error-message">{errors.paymentMethod.message}</p>
-        )}
-      </form>
-    </div>
+            {errors.paymentMethod && (
+              <p className="error-message">{errors.paymentMethod.message}</p>
+            )}
+          </form>
+        </div>
         <div className="totalSum">Загальна сумма : {totalSum}</div>
         <div className="purchase-product-details-item-btn">
-          <button className="purchase-product-details-item-button">
+          <button
+            className="purchase-product-details-item-button"
+            onClick={handleSubmit(handleSubmitOrder)}
+          >
             Замовити
           </button>
         </div>
@@ -237,44 +264,41 @@ const Purchase = (props) => {
         {props.orders.map((el) => {
           return (
             <div className="besket-products" key={el.id}>
-          <div className="besket-product">
-            <div className="besket-product-names">
-              <img src={el.img} className="besket-product-img" alt="" />
-              <span className="besket-product-name">{el.name}</span>
-            </div>
+              <div className="order-product">
+                <div className="order-product-info">
+                  <img src={el.img} className="order-product-img" alt="" />
+                  <span className="order-product-name">{el.name}</span>
+                </div>
 
-            <div className="besket-count">
-              <span className="besket-count-item">{el.counter}</span>
-              <div className="besket-counter">
-                <span
-                  className="besket-counter-plus"
-                  onClick={() => props.incrementCounter(el.id)}
+                <div className="order-product-count">
+                  <span className="order-product-count-item">{el.counter}</span>
+                  <div className="order-product-counter">
+                    <span
+                      className="order-product-counter-plus"
+                      onClick={() => props.incrementCounter(el.id)}
+                    >
+                      +
+                    </span>
+                    <span
+                      className="order-product-counter-minus"
+                      onClick={() => props.decrementCounter(el.id)}
+                    >
+                      -
+                    </span>
+                  </div>
+                </div>
+                <div className="order-product-price">{el.price} грн</div>
+                <div
+                  className="order-product-delete"
+                  onClick={() => props.handleRemoveProduct(el.id)}
                 >
-                  +
-                </span>
-                <span
-                  className="besket-counter-minus"
-                  onClick={() => props.decrementCounter(el.id)}
-                >
-                  -
-                </span>
+                  <i className="fa-solid fa-trash"></i>
+                </div>
               </div>
             </div>
-            <div className="besket-price">{el.price} грн</div>
-            <div
-              className="delete-product"
-              onClick={() => props.handleRemoveProduct(el.id)}
-            >
-              <i className="fa-solid fa-trash"></i>
-            </div>
-          </div>
-        </div>
           );
         })}
-       
-       
       </div>
-      
     </div>
   );
 };
