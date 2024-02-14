@@ -1,4 +1,4 @@
-import React, { useState  , createContext } from "react";
+import React, { useState, createContext } from "react";
 import Navbar from "../Navbar/Navbar.js";
 import Footer from "../../UI/Footer/Footer.js";
 import products from "../../../product.json";
@@ -6,6 +6,7 @@ import "../../../index.css";
 import axios from "axios";
 
 export const AppContext = createContext();
+
 const App = () => {
   const [product, setProduct] = useState(products.product);
   const [orders, setOrders] = useState([]);
@@ -72,6 +73,7 @@ const App = () => {
         "Можна купити будь який наш товар в кредит або митєву розтрочку",
     },
   ];
+
   const [userData, setUserData] = useState({
     firstName: "",
     number: "",
@@ -106,7 +108,6 @@ const App = () => {
   const toggleAccount = () => {
     setIsAcount(!isAccount);
   };
-  console.log(userData);
 
   const addToOrder = (item) => {
     const isItemInOrder = orders.some((orderItem) => orderItem.id === item.id);
@@ -118,10 +119,12 @@ const App = () => {
       console.log("Цей товар вже є в кошику");
     }
   };
+
   const updateOrders = (updatedOrders, totalCost) => {
     setOrders(updatedOrders);
     setTotalCost(totalCost);
   };
+
   const infoProduct = (item) => {
     setInfoProducts([item]);
   };
@@ -140,6 +143,7 @@ const App = () => {
 
     setTotalCost(total);
   };
+
   const choseCategory = (category, heading) => {
     if (category === "all") {
       setCurrentItems(product);
@@ -248,6 +252,7 @@ const App = () => {
   const handleRemoveProduct = (productId) => {
     removeProduct(productId);
   };
+
   const contextValues = {
     product,
     addToOrder,
@@ -284,40 +289,10 @@ const App = () => {
 
   return (
     <div className="App">
-      <Navbar
-        product={product}
-        addToOrder={addToOrder}
-        orders={orders}
-        removeProduct={removeProduct}
-        totalCost={totalCost}
-        infoProduct={infoProduct}
-        infoProducts={infoProducts}
-        updateOrders={updateOrders}
-        searchResults={searchResults}
-        services={services}
-        renderCart={renderCart}
-        searchTerm={searchTerm}
-        currentItems={currentItems}
-        choseProducer={choseProducer}
-        categories={categories}
-        minPrice={minPrice}
-        maxPrice={maxPrice}
-        producers={producers}
-        selectedProducers={selectedProducers}
-        showFunction={showFunction}
-        choseCategory={choseCategory}
-        handleSearch={handleSearch}
-        choseCategoryNew={choseCategoryNew}
-        handleRemoveProduct={handleRemoveProduct}
-        decrementCounter={decrementCounter}
-        incrementCounter={incrementCounter}
-        handleRegistration={handleRegistration}
-        handleLogin={handleLogin}
-        toggleAccount={toggleAccount}
-        isAccount={isAccount}
-        userData={userData}
-      />
-      <Footer />
+      <AppContext.Provider value={contextValues}>
+        <Navbar />
+        <Footer />
+      </AppContext.Provider>
     </div>
   );
 };

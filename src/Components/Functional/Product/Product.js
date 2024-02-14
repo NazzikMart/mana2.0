@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AppContext } from "../App/App";
 import "./Product.css";
 
 const Product = (props) => {
+  const { addToOrder } = useContext(AppContext);
+
   return (
     <div>
       {props.infoProducts.map((el) => (
@@ -28,7 +31,7 @@ const Product = (props) => {
             <div className="element-product-details-btn">
               <button
                 className="element-product-details-button"
-                onClick={() => props.addToOrder(el)}
+                onClick={() => addToOrder(el)}
               >
                 <i className="fa-sharp fa-solid fa-cart-shopping"></i> В кошик
               </button>

@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Purchase.css";
-import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios"; // Додали axios для відправки запитів на сервер
+import { AppContext } from "../../Functional/App/App";
 
-const Purchase = (props) => {
+const Purchase = () => {
+  const { orders, incrementCounter, decrementCounter, handleRemoveProduct } =
+    useContext(AppContext);
+
   const [totalSum, setTotalSum] = useState(0);
+
   const {
     register,
     handleSubmit,
@@ -15,38 +19,39 @@ const Purchase = (props) => {
     watch,
   } = useForm();
 
+  useEffect(() => {
+    calculateTotalSum();
+  }, [orders]);
+
   const calculateTotalSum = () => {
     let sum = 0;
-    props.orders.forEach((el) => {
+    orders.forEach((el) => {
       sum += Number(el.price) * el.counter; // Помножимо ціну товару на його кількість
     });
     setTotalSum(sum);
   };
 
-  React.useEffect(() => {
-    calculateTotalSum();
-  }, [props.orders]);
-
   const handleSubmitOrder = () => {
-    const orderData = props.orders.map((order) => ({
+    const orderData = orders.map((order) => ({
       productId: order.id,
       quantity: order.counter,
       // Якщо ви хочете також включити інші дані товару, такі як назва, ціна, то можете додати їх сюди
     }));
 
-    axios.post('/api/orders', { orderData })
-      .then(response => {
+    axios
+      .post("/api/orders", { orderData })
+      .then((response) => {
         console.log(response.data);
         // Додаткові дії після успішного замовлення
       })
-      .catch(error => {
-        console.error('Помилка відправки замовлення:', error);
+      .catch((error) => {
+        console.error("Помилка відправки замовлення:", error);
       });
   };
 
   const deliveryMethod = watch("deliveryMethod");
 
-  console.log(props.orders);
+
   return (
     <div className="purchase-wrapper">
       <div className="contacts-datails-items">
@@ -261,7 +266,7 @@ const Purchase = (props) => {
       </div>
 
       <div className="purchase-product-details-items">
-        {props.orders.map((el) => {
+        {orders.map((el) => {
           return (
             <div className="besket-products" key={el.id}>
               <div className="order-product">
@@ -275,13 +280,13 @@ const Purchase = (props) => {
                   <div className="order-product-counter">
                     <span
                       className="order-product-counter-plus"
-                      onClick={() => props.incrementCounter(el.id)}
+                      onClick={() => incrementCounter(el.id)}
                     >
                       +
                     </span>
                     <span
                       className="order-product-counter-minus"
-                      onClick={() => props.decrementCounter(el.id)}
+                      onClick={() => decrementCounter(el.id)}
                     >
                       -
                     </span>
@@ -290,7 +295,7 @@ const Purchase = (props) => {
                 <div className="order-product-price">{el.price} грн</div>
                 <div
                   className="order-product-delete"
-                  onClick={() => props.handleRemoveProduct(el.id)}
+                  onClick={() => handleRemoveProduct(el.id)}
                 >
                   <i className="fa-solid fa-trash"></i>
                 </div>

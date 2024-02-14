@@ -1,8 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Besket.css";
+import { AppContext } from "../../Functional/App/App";
 
-const Besket = (props) => {
+const Besket = () => {
+  // Витягуємо необхідні значення з контексту
+  const {
+    orders,
+    totalCost,
+    incrementCounter,
+    decrementCounter,
+    handleRemoveProduct,
+  } = useContext(AppContext);
+
   return (
     <div className="beskett">
       <span className="besket-name">Кошик з товарами</span>
@@ -13,7 +23,7 @@ const Besket = (props) => {
         <span className="filter-item">Вартість</span>
       </div>
 
-      {props.orders.map((item) => (
+      {orders.map((item) => (
         <div className="besket-products" key={item.id}>
           <div className="besket-product">
             <div className="besket-product-names">
@@ -26,13 +36,13 @@ const Besket = (props) => {
               <div className="besket-counter">
                 <span
                   className="besket-counter-plus"
-                  onClick={() => props.incrementCounter(item.id)}
+                  onClick={() => incrementCounter(item.id)}
                 >
                   +
                 </span>
                 <span
                   className="besket-counter-minus"
-                  onClick={() => props.decrementCounter(item.id)}
+                  onClick={() => decrementCounter(item.id)}
                 >
                   -
                 </span>
@@ -41,7 +51,7 @@ const Besket = (props) => {
             <div className="besket-price">{item.price} грн</div>
             <div
               className="delete-product"
-              onClick={() => props.handleRemoveProduct(item.id)}
+              onClick={() => handleRemoveProduct(item.id)}
             >
               <i className="fa-solid fa-trash"></i>
             </div>
@@ -51,7 +61,7 @@ const Besket = (props) => {
 
       <div className="all-price">
         <span className="all-price-text"> Загальна сума : </span>
-        <span className="all-price-total">{props.totalCost} грн</span>
+        <span className="all-price-total">{totalCost} грн</span>
       </div>
       <div className="order-product-besket-btn">
         <Link to="/purchase" className="order-product-besket-button">

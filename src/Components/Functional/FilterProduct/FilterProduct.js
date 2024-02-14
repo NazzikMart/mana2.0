@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { AppContext } from "../App/App";
 import "./FilterProduct.css";
 
-const FilterProduct = (props) => {
-  console.log(props.categories)
+const FilterProduct = () => {
+  // Витягуємо значення контексту за допомогою useContext
+  const { categories, choseCategory } = useContext(AppContext);
+
   return (
     <div className="FilterProduct">
-      {props.categories.map((item) => (
+      {categories.map((item) => (
         <span
           className="category-item"
           key={item.key}
-          onClick={() => props.choseCategory(item.key)}
+          onClick={() => choseCategory(item.key)}
         >
           {item.name}
         </span>
