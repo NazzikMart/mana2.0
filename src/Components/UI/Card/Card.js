@@ -4,12 +4,8 @@ import { AppContext } from "../../Functional/App/App";
 
 const Card = () => {
   // Витягуємо значення контексту за допомогою useContext
-  const {
-    searchTerm,
-    searchResults,
-    currentItems,
-    addToOrder
-  } = useContext(AppContext);
+  const { searchTerm, searchResults, currentItems, addToOrder } =
+    useContext(AppContext);
 
   return (
     <React.Fragment>

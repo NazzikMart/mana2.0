@@ -13,38 +13,36 @@ const Contact = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    console.log(e.target.value)
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3003/api/contactDate/",
+        "http://localhost:3003/contactData",
         formData
       );
 
       console.log(response.data.message);
-      // Очистити дані форми після успішного відправлення
       setFormData({
         name: "",
         phone: "",
-        comment: "",
+        comment: ""
       });
     } catch (error) {
       console.error("Помилка при відправці даних на сервер:", error.message);
-      // Обробка помилок відправки
       if (error.response) {
-        // Помилка від сервера (запит не успішний)
         console.error("Статус помилки:", error.response.status);
       } else if (error.request) {
-        // Немає відповіді від сервера (запит не відправлено)
         console.error("Запит не був відправлений:", error.request);
       } else {
-        // Інші помилки
         console.error("Помилка:", error.message);
       }
-      // Встановити помилки для відображення на сторінці
-      setErrors({ submit: "Помилка при відправці форми. Будь ласка, спробуйте ще раз." });
+      setErrors({
+        submit:
+          "Помилка при відправці форми. Будь ласка, спробуйте ще раз."
+      });
     }
   };
   return (

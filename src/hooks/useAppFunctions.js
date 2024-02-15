@@ -1,54 +1,40 @@
-import React, { useState, createContext } from "react";
-import Navbar from "../Navbar/Navbar.js";
-import Footer from "../../UI/Footer/Footer.js";
-import products from "../../../json/product.json";
-import categorie from "../../../json/categorie.json";
-import producer from "../../../json/producer.json";
-import service from "../../../json/service";
-import "../../../index.css";
+import { useContext } from "react";
 import axios from "axios";
+import { AppContext } from "../Components/Functional/App/App";
 
-export const AppContext = createContext();
-const App = () => {
-  // const {
-  //   handleRegistration,
-  //   handleLogin,
-  //   toggleAccount,
-  //   addToOrder,
-  //   updateOrders,
-  //   infoProduct,
-  //   removeProduct,
-  //   choseCategory,
-  //   choseCategoryNew,
-  //   handleSearch,
-  //   filterByPrice,
-  //   filterByProducer,
-  //   choseProducer,
-  //   showFunction,
-  //   incrementCounter,
-  //   decrementCounter,
-  //   handleRemoveProduct,
-  // } = useAppFunctions();
-  const [product, setProduct] = useState(products.product);
-  const [orders, setOrders] = useState([]);
-  const [totalCost, setTotalCost] = useState(0);
-  const [infoProducts, setInfoProducts] = useState([]);
-  const [producers, setProducers] = useState(producer.producer);
-  const [categories, setCategories] = useState(categorie.categorie);
-  const [currentItems, setCurrentItems] = useState([...product]);
-  const [maxPrice, setMaxPrice] = useState("");
-  const [minPrice, setMinPrice] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [selectedProducers, setSelectedProducers] = useState([]);
-  const [renderCart, setRenderCart] = useState(false);
-  const [services, setServices] = useState(service.service);
-  const [userData, setUserData] = useState({
-    firstName: "",
-    number: "",
-    password: "",
-  });
-  const [isAccount, setIsAcount] = useState(true);
+ const useAppFunctions = () => {
+  const {
+    product,
+    setProduct,
+    orders,
+    setOrders,
+    totalCost,
+    setTotalCost,
+    infoProducts,
+    setInfoProducts,
+    producers,
+    categories,
+    currentItems,
+    setCurrentItems,
+    maxPrice,
+    setMaxPrice,
+    minPrice,
+    setMinPrice,
+    searchTerm,
+    setSearchTerm,
+    searchResults,
+    setSearchResults,
+    selectedProducers,
+    setSelectedProducers,
+    renderCart,
+    setRenderCart,
+    services,
+    setServices,
+    userData,
+    setUserData,
+    isAccount,
+    setIsAcount,
+  } = useContext(AppContext);
 
   const handleRegistration = async (data) => {
     try {
@@ -76,7 +62,6 @@ const App = () => {
   const toggleAccount = () => {
     setIsAcount(!isAccount);
   };
-  console.log(userData);
 
   const addToOrder = (item) => {
     const isItemInOrder = orders.some((orderItem) => orderItem.id === item.id);
@@ -88,10 +73,12 @@ const App = () => {
       console.log("Цей товар вже є в кошику");
     }
   };
+
   const updateOrders = (updatedOrders, totalCost) => {
     setOrders(updatedOrders);
     setTotalCost(totalCost);
   };
+
   const infoProduct = (item) => {
     setInfoProducts([item]);
   };
@@ -110,6 +97,7 @@ const App = () => {
 
     setTotalCost(total);
   };
+
   const choseCategory = (category, heading) => {
     if (category === "all") {
       setCurrentItems(product);
@@ -142,19 +130,19 @@ const App = () => {
     setSearchResults(results);
   };
 
-  const filterByPcrice = () => {
+  const filterByPrice = () => {
     if (minPrice !== "" && maxPrice !== "") {
-      const FilterProductPrice = currentItems.filter((el) => {
+      const filteredProduct = currentItems.filter((el) => {
         return el.price >= Number(minPrice) && el.price <= Number(maxPrice);
       });
-      setCurrentItems(FilterProductPrice);
+      setCurrentItems(filteredProduct);
     }
   };
 
   const filterByProducer = () => {
     if (selectedProducers.length > 0) {
       const filteredProducts = product.filter((el) =>
-        selectedProducers.includes(el.producerц)
+        selectedProducers.includes(el.producer)
       );
       setCurrentItems(filteredProducts);
     } else {
@@ -172,7 +160,7 @@ const App = () => {
 
   const showFunction = () => {
     filterByProducer();
-    filterByPcrice();
+    filterByPrice();
   };
 
   const incrementCounter = (productId, price) => {
@@ -219,48 +207,26 @@ const App = () => {
     removeProduct(productId);
   };
 
-  const contextValues = {
-    product,
-    addToOrder,
-    orders,
-    removeProduct,
-    totalCost,
-    infoProduct,
-    infoProducts,
-    updateOrders,
-    searchResults,
-    services,
-    renderCart,
-    searchTerm,
-    currentItems,
-    choseProducer,
-    categories,
-    minPrice,
-    maxPrice,
-    producers,
-    selectedProducers,
-    showFunction,
-    choseCategory,
-    handleSearch,
-    choseCategoryNew,
-    handleRemoveProduct,
-    decrementCounter,
-    incrementCounter,
+  return {
     handleRegistration,
     handleLogin,
     toggleAccount,
-    isAccount,
-    userData,
+    addToOrder,
+    updateOrders,
+    infoProduct,
+    removeProduct,
+    choseCategory,
+    choseCategoryNew,
+    handleSearch,
+    filterByPrice,
+    filterByProducer,
+    choseProducer,
+    showFunction,
+    incrementCounter,
+    decrementCounter,
+    handleRemoveProduct,
   };
-
-  return (
-    <div className="App">
-      <AppContext.Provider value={contextValues}>
-        <Navbar />
-        <Footer />
-      </AppContext.Provider>
-    </div>
-  );
 };
 
-export default App;
+
+export default useAppFunctions

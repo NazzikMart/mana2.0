@@ -1,0 +1,8 @@
+{
+    "producer" : [
+        { "name": "SilverCrest", "id": 1, "category": "producer" },
+        { "name": "Elenberg", "id": 2, "category": "producer" },
+        { "name": "SeaBreeze", "id": 3, "category": "producer" },
+        { "name": "Magio", "id": 4, "category": "producer" }
+    ]
+}
