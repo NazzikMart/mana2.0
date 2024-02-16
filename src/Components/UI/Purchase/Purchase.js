@@ -31,15 +31,19 @@ const Purchase = () => {
     setTotalSum(sum);
   };
 
-  const handleSubmitOrder = () => {
-    const orderData = orders.map((order) => ({
-      productId: order.id,
-      quantity: order.counter,
-      // Якщо ви хочете також включити інші дані товару, такі як назва, ціна, то можете додати їх сюди
-    }));
-
-    axios
-      .post("/api/orders", { orderData })
+  const handleSubmitOrder = async (e) => {
+   
+    const formData = {
+      name: watch("name"),
+      phoneNumber: watch("phoneNumber"),
+      deliveryMethod: watch("deliveryMethod"),
+      npOffice: watch("npOffice"),
+      paymentMethod: watch("paymentMethod"),
+      totalSum: totalSum,
+    };
+  
+  await  axios
+      .post("http://localhost:3001/api/orders", formData)
       .then((response) => {
         console.log(response.data);
         // Додаткові дії після успішного замовлення
@@ -110,7 +114,7 @@ const Purchase = () => {
 
         <div className="delivery-date-items">
           <span className="delivery-date-item-name">Спосіб доставки</span>
-          <form className="delivery-date-item-form">
+          <form className="delivery-date-item-form" onSubmit={handleSubmit(handleSubmitOrder)}>
             <Controller
               name="deliveryMethod"
               control={control}

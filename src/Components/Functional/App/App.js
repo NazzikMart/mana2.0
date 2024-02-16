@@ -10,25 +10,6 @@ import axios from "axios";
 
 export const AppContext = createContext();
 const App = () => {
-  // const {
-  //   handleRegistration,
-  //   handleLogin,
-  //   toggleAccount,
-  //   addToOrder,
-  //   updateOrders,
-  //   infoProduct,
-  //   removeProduct,
-  //   choseCategory,
-  //   choseCategoryNew,
-  //   handleSearch,
-  //   filterByPrice,
-  //   filterByProducer,
-  //   choseProducer,
-  //   showFunction,
-  //   incrementCounter,
-  //   decrementCounter,
-  //   handleRemoveProduct,
-  // } = useAppFunctions();
   const [product, setProduct] = useState(products.product);
   const [orders, setOrders] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
